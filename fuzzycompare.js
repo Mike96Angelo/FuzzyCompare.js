@@ -30,15 +30,13 @@ const fuzzyCompare = (
   const lenHaystack = haystack.length
 
   if (
+    lenNeedle === 0 ||
     lenHaystack === 0
   ) {
     return 0
   }
 
-  if (
-    lenNeedle === 0 ||
-    (lenNeedle === lenHaystack && needle === haystack)
-  ) {
+  if (lenNeedle === lenHaystack && needle === haystack) {
     return 1
   }
 
