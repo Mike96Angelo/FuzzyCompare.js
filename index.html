@@ -14,7 +14,7 @@
       const input = document.getElementById('input')
       const result = document.getElementById('result')
       input.oninput = () => {
-        const tern = input.value
+        const term = input.value
         result.innerHTML = words.map((w) => ({w, s: fuzzyCompare(term, w)}))
           .sort((a, b) => b.s - a.s)
           .reduce((acc, next) => `<li>${next.w} - ${next.s}</li>`, '')
