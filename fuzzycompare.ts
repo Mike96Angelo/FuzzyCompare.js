@@ -1,8 +1,21 @@
+/* Fuzzy Compare Threshold
+ * @param needle     The search term.
+ * @param haystack   The search space.
+ * @param threshold  The threshold to pass.
+ *
+ * @returns True if the score is >= threshold
+ */
+export const fuzzyCompareThreshold = (
+  needle: string,
+  haystack: string,
+  threshold: number = 0.5,
+) => fuzzyCompare(needle, haystack) >= threshold
+
 /* Fuzzy Compare
  * @param needle    The search term.
  * @param haystack  The search space.
  *
- * @returns A score between 0.0 and 1.0, higher score means better match.
+ * @returns A score between 0.0 and 1.0
  */
 export const fuzzyCompare = (
   needle: string,
@@ -29,8 +42,13 @@ export const fuzzyCompare = (
     return 1
   }
 
+  const meanGoalNeedle = lenNeedle * (lenNeedle + 1) / 2
+  const meanGoalHaystack = lenHaystack * (lenHaystack + 1) / 2
+
   let meanHitsNeedle = 0
   let meanHitsHaystack = 0
+
+  let lastH = 0
 
   // tslint:disable-next-line:no-increment-decrement
   outer: for (let n = 0, h = 0; n < lenNeedle; n++) {
@@ -44,6 +62,7 @@ export const fuzzyCompare = (
 
         // tslint:disable-next-line:no-increment-decrement
         h++
+        lastH = h
 
         continue outer
       } else {
@@ -51,13 +70,9 @@ export const fuzzyCompare = (
         h++
       }
     }
+
+    h = lastH
   }
-
-  meanHitsNeedle /= lenNeedle
-  meanHitsHaystack /= lenHaystack
-
-  const meanGoalNeedle = (lenNeedle * (lenNeedle + 1) / 2) / lenNeedle
-  const meanGoalHaystack = (lenHaystack * (lenHaystack + 1) / 2) / lenHaystack
 
   return (meanHitsNeedle / meanGoalNeedle + meanHitsHaystack / meanGoalHaystack) / 2
 }
