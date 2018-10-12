@@ -17,7 +17,7 @@
         const term = input.value
         result.innerHTML = words.map((w) => ({w, s: fuzzyCompare(term, w)}))
           .sort((a, b) => b.s - a.s)
-          .reduce((acc, next) => `<li>${next.w} - ${next.s}</li>`, '')
+          .reduce((acc, next) => acc += `<li>${next.w} - ${next.s}</li>`, '')
       }
     </script>
 
