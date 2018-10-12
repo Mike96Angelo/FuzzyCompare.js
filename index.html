@@ -13,7 +13,7 @@
     <script type="text/javascript">
       input.oninput = () => {
         const tern = input.value
-        result.innerHTML = words.map((w) => {w, s: fuzzyCompare(term, w)})
+        result.innerHTML = words.map((w) => ({w, s: fuzzyCompare(term, w)}))
           .sort((a, b) => b.s - a.s)
           .reduce((acc, next) => `<li>${next.w} - ${next.s}</li>`, '')
       }
