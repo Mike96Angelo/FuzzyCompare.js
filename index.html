@@ -11,6 +11,8 @@
     <ul id="result"></ul>
 
     <script type="text/javascript">
+      const input = document.getElementById('input')
+      const result = document.getElementById('result')
       input.oninput = () => {
         const tern = input.value
         result.innerHTML = words.map((w) => ({w, s: fuzzyCompare(term, w)}))
