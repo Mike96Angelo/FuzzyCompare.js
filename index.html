@@ -16,7 +16,13 @@
       input.oninput = () => {
         const term = input.value
         result.innerHTML = words.map((w) => ({w, s: fuzzyCompare(term, w)}))
-          .sort((a, b) => b.s - a.s)
+          .sort((a, b) => {
+            const c = b.s - a.s
+            if (!c) {
+              return a.w.localeCompare(b.w)
+            }
+            return c
+          })
           .slice(0, 20)
           .reduce((acc, next) => acc += `<li>${next.w} - ${next.s}</li>`, '')
       }
