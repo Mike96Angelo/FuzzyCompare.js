@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>FuzzyCompare.js</title>
+    <script src="./words.js" charset="utf-8"></script>
+    <script src="./fuzzycompare.js" charset="utf-8"></script>
+  </head>
+  <body>
+    <input id="input" type="text" name="" value="">
+    <ul id="result"></ul>
+
+    <script type="text/javascript">
+      input.oninput = () => {
+        const tern = input.value
+        result.innerHTML = words.map((w) => {w, s: fuzzyCompare(term, w)})
+          .sort((a, b) => b.s - a.s)
+          .reduce((acc, next) => `<li>${next.w} - ${next.s}</li>`, '')
+      }
+    </script>
+
+  </body>
+</html>
