@@ -2,7 +2,7 @@
  * @param needle    The search term.
  * @param haystack  The search space.
  *
- * @returns A score between 0.0 and 1.0
+ * @returns A score between 0.0 and 1.0, higher score means better match.
  */
 export const fuzzyCompare = (
   needle: string,
